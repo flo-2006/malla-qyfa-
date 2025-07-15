@@ -19,82 +19,18 @@ const mallaDatos = {
       { id: "etica", nombre: "Ética", abre: ["persoc"] }
     ]
   },
-  // ... Resto de años igual que antes ...
-};
-
-// Primero: invertimos la relación para saber qué ramos dependen de cada ramo
-const dependientes = {};
-
-// Crear dependientes para facilitar desbloqueo
-for (const anio in mallaDatos) {
-  for (const semestre in mallaDatos[anio]) {
-    mallaDatos[anio][semestre].forEach(ramo => {
-      if (!(ramo.id in dependientes)) dependientes[ramo.id] = [];
-      ramo.abre.forEach(abierto => {
-        if (!(abierto in dependientes)) dependientes[abierto] = [];
-        dependientes[abierto].push(ramo.id);
-      });
-    });
-  }
-}
-
-const estado = {}; // estados: bloqueado, activo, aprobado
-
-function puedeEstarActivo(ramoId) {
-  // Un ramo puede activarse si TODOS sus prerequisitos están aprobados
-  if (!(ramoId in dependientes)) return true; // Si no tiene prereqs
-  return dependientes[ramoId].every(preReqId => estado[preReqId] === "aprobado");
-}
-
-function crearRamo(ramo, contenedor) {
-  const div = document.createElement("div");
-  div.className = "ramo";
-  div.textContent = ramo.nombre;
-  div.id = ramo.id;
-  div.onclick = () => aprobarRamo(ramo);
-  
-  // Estado inicial:
-  if (puedeEstarActivo(ramo.id)) {
-    estado[ramo.id] = "activo";
-  } else {
-    estado[ramo.id] = "bloqueado";
-    div.classList.add("bloqueado");
-  }
-  
-  contenedor.appendChild(div);
-}
-
-function aprobarRamo(ramo) {
-  if (estado[ramo.id] !== "activo") return; // solo activos pueden aprobarse
-  const div = document.getElementById(ramo.id);
-  div.classList.add("aprobado");
-  div.onclick = null;
-  estado[ramo.id] = "aprobado";
-  
-  // Al aprobar, intentamos activar todos los ramos que dependen de este
-  for (const ramoId in estado) {
-    if (estado[ramoId] === "bloqueado" && puedeEstarActivo(ramoId)) {
-      estado[ramoId] = "activo";
-      const divRamo = document.getElementById(ramoId);
-      divRamo.classList.remove("bloqueado");
-    }
-  }
-}
-
-for (const anio in mallaDatos) {
-  const tituloAnio = document.createElement("h2");
-  tituloAnio.textContent = anio;
-  malla.appendChild(tituloAnio);
-
-  for (const semestre in mallaDatos[anio]) {
-    const tituloSemestre = document.createElement("h3");
-    tituloSemestre.textContent = semestre;
-    malla.appendChild(tituloSemestre);
-
-    const contenedor = document.createElement("div");
-    contenedor.className = "semestre";
-    malla.appendChild(contenedor);
-
-    mallaDatos[anio][semestre].forEach(ramo => crearRamo(ramo, contenedor));
-  }
-}
+  "2° Año": {
+    "1° Semestre": [
+      { id: "qa", nombre: "Química Analítica Cuali/Cuantitativa", abre: ["aqi"] },
+      { id: "qo", nombre: "Química Orgánica", abre: ["bqg", "qoa"] },
+      { id: "fi", nombre: "Fisiología Integrada", abre: ["fp"] },
+      { id: "fq", nombre: "Fisicoquímica", abre: ["tf1"] },
+      { id: "salpop", nombre: "Salud Poblacional", abre: ["epid"] },
+      { id: "gestper", nombre: "Gestión Personal", abre: [] }
+    ],
+    "2° Semestre": [
+      { id: "aqi", nombre: "Análisis Químico Instrumental", abre: [] },
+      { id: "bqg", nombre: "Bioquímica General", abre: ["microb"] },
+      { id: "fp", nombre: "Fisiopatología", abre: ["farma1"] },
+      { id: "qoa", nombre: "Química Orgánica Avanzada", abre: ["qf1"] },
+      { id: "epid", nombre: "Epidemiología", abre:
