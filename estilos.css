@@ -11,54 +11,45 @@ h1 {
   margin-bottom: 2rem;
 }
 
-h2 {
-  color: #a76fba;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-h3 {
-  color: #7a9ebb;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-#malla {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* Contenedor por año: para agrupar semestres en fila */
 .anio {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  flex-direction: column;
   border: 2px solid #c97cc9;
-  padding: 1rem;
   border-radius: 10px;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
 
-/* Cada semestre en columna vertical */
+.anio > h2 {
+  margin-bottom: 1rem;
+  color: #a76fba;
+  text-align: center;
+}
+
 .semestre {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-  background-color: #ffd6ec;
-  padding: 10px;
-  border-radius: 10px;
-  min-width: 220px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.semestre > h3 {
+  width: 100%;
+  color: #7a9ebb;
+  margin-bottom: 0.5rem;
 }
 
 .ramo {
   padding: 10px 15px;
   border-radius: 10px;
-  background-color: #f7c8f2;
+  background-color: #ffd6ec;
   border: 2px solid #c97cc9;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
   user-select: none;
   text-align: center;
+  min-width: 140px;
 }
 
 .ramo:hover {
