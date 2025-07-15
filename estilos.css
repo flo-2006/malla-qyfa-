@@ -31,13 +31,16 @@ h1 {
   flex-direction: row;
   gap: 10px;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* aquí no se rompe la fila */
+  overflow-x: auto; /* habilita scroll horizontal si es necesario */
+  padding-bottom: 5px; /* espacio para scrollbar */
 }
 
 .semestre > h3 {
   width: 100%;
   color: #7a9ebb;
   margin-bottom: 0.5rem;
+  flex-shrink: 0; /* que no se achique el título */
 }
 
 .ramo {
@@ -50,6 +53,7 @@ h1 {
   user-select: none;
   text-align: center;
   min-width: 140px;
+  flex-shrink: 0; /* para que no se reduzcan los cuadros */
 }
 
 .ramo:hover {
