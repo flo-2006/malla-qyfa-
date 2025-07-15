@@ -11,13 +11,21 @@ h1 {
   margin-bottom: 2rem;
 }
 
+#malla {
+  display: flex;
+  flex-direction: row; /* años en fila horizontal */
+  gap: 2rem;
+  overflow-x: auto; /* scroll horizontal si hay muchos años */
+  padding-bottom: 10px;
+}
+
 .anio {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* semestres verticales */
   border: 2px solid #c97cc9;
   border-radius: 10px;
-  margin-bottom: 2rem;
   padding: 1rem;
+  min-width: 220px;
 }
 
 .anio > h2 {
@@ -28,19 +36,16 @@ h1 {
 
 .semestre {
   display: flex;
-  flex-direction: row;
-  gap: 10px;
-  margin-bottom: 1rem;
-  flex-wrap: nowrap; /* aquí no se rompe la fila */
-  overflow-x: auto; /* habilita scroll horizontal si es necesario */
-  padding-bottom: 5px; /* espacio para scrollbar */
+  flex-direction: column; /* ramos verticales */
+  gap: 8px;
+  margin-bottom: 1.5rem;
 }
 
 .semestre > h3 {
-  width: 100%;
   color: #7a9ebb;
   margin-bottom: 0.5rem;
-  flex-shrink: 0; /* que no se achique el título */
+  text-align: center;
+  font-weight: 600;
 }
 
 .ramo {
@@ -52,8 +57,7 @@ h1 {
   transition: transform 0.2s, background-color 0.2s;
   user-select: none;
   text-align: center;
-  min-width: 140px;
-  flex-shrink: 0; /* para que no se reduzcan los cuadros */
+  min-width: 180px;
 }
 
 .ramo:hover {
