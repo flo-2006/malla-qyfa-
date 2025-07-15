@@ -1,6 +1,6 @@
 const malla = document.getElementById("malla");
 
-const estado = {}; // id: aprobado/bloqueado
+const estado = {}; // Estado de cada ramo
 
 function crearRamo(ramo, contenedor, desbloqueadoInicial = false) {
   const div = document.createElement("div");
@@ -25,20 +25,23 @@ function aprobarRamo(ramo) {
   desbloquear(ramo.id);
 }
 
-function desbloquear(id) {
-  const ramo = Object.values(mallaDatos)
-    .flatMap(anio => Object.values(anio).flat())
-    .find(r => r.id === id);
-  if (!ramo) return;
-  ramo.abre.forEach(dest => {
-    const destDiv = document.getElementById(dest);
-    if (estado[dest] !== "aprobado") {
-      destDiv.classList.remove("bloqueado");
-      estado[dest] = "activo";
+function desbloquear(idAprobado) {
+  for (const anio of Object.values(mallaDatos)) {
+    for (const semestre of Object.values(anio)) {
+      for (const ramo of semestre) {
+        if (ramo.abre.includes(idAprobado)) {
+          const divDestino = document.getElementById(ramo.id);
+          if (divDestino && estado[ramo.id] === "bloqueado") {
+            divDestino.classList.remove("bloqueado");
+            estado[ramo.id] = "activo";
+          }
+        }
+      }
     }
-  });
+  }
 }
 
+// Generación visual
 for (const anio in mallaDatos) {
   const contenedorAnio = document.createElement("div");
   contenedorAnio.className = "anio";
@@ -59,7 +62,10 @@ for (const anio in mallaDatos) {
     contenedorSemestre.appendChild(tituloSemestre);
 
     const desbloqueadoInicial = anio === "1° Año" && semestre === "1° Semestre";
-    mallaDatos[anio][semestre].forEach(ramo => crearRamo(ramo, contenedorSemestre, desbloqueadoInicial));
+
+    mallaDatos[anio][semestre].forEach(ramo =>
+      crearRamo(ramo, contenedorSemestre, desbloqueadoInicial)
+    );
 
     contenedorSemestres.appendChild(contenedorSemestre);
   }
