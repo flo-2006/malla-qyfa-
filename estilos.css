@@ -21,11 +21,11 @@ h1 {
 
 .anio {
   display: flex;
-  flex-direction: column; /* semestres verticales */
+  flex-direction: column; /* años verticales */
   border: 2px solid #c97cc9;
   border-radius: 10px;
   padding: 1rem;
-  min-width: 220px;
+  min-width: 450px; /* más ancho para que quepan los semestres lado a lado */
 }
 
 .anio > h2 {
@@ -34,11 +34,21 @@ h1 {
   text-align: center;
 }
 
+/* Contenedor de los semestres: fila horizontal */
+.anio .semestres-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Cada semestre */
 .semestre {
   display: flex;
   flex-direction: column; /* ramos verticales */
   gap: 8px;
   margin-bottom: 1.5rem;
+  min-width: 200px;
 }
 
 .semestre > h3 {
