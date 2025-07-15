@@ -1,7 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background: #fef6ff;
+  background: #fff0f6;
   color: #333;
+  margin: 0;
   padding: 2rem;
 }
 
@@ -13,12 +14,76 @@ h1 {
 
 #malla {
   display: flex;
-  flex-direction: row; /* Años uno al lado del otro */
+  flex-direction: row; /* Años en horizontal */
   gap: 2rem;
   overflow-x: auto;
-  padding-bottom: 10px;
 }
 
 .anio {
   display: flex;
-  flex-direction:
+  flex-direction: column;
+  border: 2px solid #c97cc9;
+  border-radius: 10px;
+  padding: 1rem;
+  min-width: 460px;
+  background-color: #fff8fc;
+}
+
+.anio > h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #a76fba;
+}
+
+/* Semestres uno al lado del otro */
+.semestres-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Cada semestre en columna */
+.semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.semestre > h3 {
+  color: #7a9ebb;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.ramo {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffd6ec;
+  border: 2px solid #c97cc9;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.ramo:hover {
+  transform: scale(1.05);
+}
+
+.ramo.aprobado {
+  background-color: #b3e6ff;
+  border-color: #7ec5e6;
+  text-decoration: line-through;
+  color: #333;
+  cursor: default;
+}
+
+.ramo.bloqueado {
+  background-color: #eee;
+  border-color: #ccc;
+  color: #aaa;
+  cursor: not-allowed;
+  pointer-events: none;
+}
